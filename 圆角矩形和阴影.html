@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+ 
+</head>
+<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+
+        <script type="text/javascript">
+            var canvas=document.getElementById('canvas');
+            var ctx=canvas.getContext('2d');
+            ctx.shadowOffsetX=50;//X方向阴影
+            ctx.shadowOffsetY=50;//Y方向阴影
+            ctx.shadowBlur=80;//模糊度
+            ctx.shadowColor='red';
+            
+
+                   function Rect(x, y, w, h) {
+                        return {x:x, y:y, width:w, height:h};
+                    }
+                    
+                    var rect = Rect(100, 100, 300, 200);
+                    var r = 40;
+                    
+                drawUsingArc(rect, r, ctx);     
+                    
+                    function drawUsingArc(rect, r, ctx) {
+                        var path = new Path2D();
+                        ctx.fillStyle="blue"
+
+                        path.moveTo(rect.x + r, rect.y);
+                        path.lineTo(rect.x + rect.width - r, rect.y);
+                        path.arc(rect.x + rect.width - r, rect.y + r, r, Math.PI / 180 * 270, 0, false);
+                        path.lineTo(rect.x + rect.width, rect.y + rect.height - r);
+                        path.arc(rect.x + rect.width - r, rect.y + rect.height - r, r, 0, Math.PI / 180 * 90, 0, false);
+                        path.lineTo(rect.x + r, rect.y + rect.height);
+                        path.arc(rect.x + r, rect.y + rect.height - r, r, Math.PI / 180 * 90, Math.PI / 180 * 180, false);
+                        path.lineTo(rect.x, rect.y + r);
+                        path.arc(rect.x + r, rect.y + r, r, Math.PI / 180 * 180, Math.PI / 180 * 270, false);
+                    
+                        ctx.fill(path);
+                    }
+
+           
+  </script>
+</body>
+</html>
